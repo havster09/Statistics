@@ -6,8 +6,9 @@ import {Provider} from 'react-redux';
 import {Router,browserHistory} from 'react-router';
 import routes from './routes';
 import {loadCourses,loadPosts} from './actions/courseActions';
+import {loadUsers} from './actions/userActions';
+import {loadAuthors} from './actions/authorActions';
 import './styles/styles.css';
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -15,6 +16,8 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 const store = configureStore(); //pass state value from server if needed to overwrite state defaults in reducer
 store.dispatch(loadCourses());
 store.dispatch(loadPosts());
+store.dispatch(loadUsers());
+store.dispatch(loadAuthors());
 // wrap react router with Provider to make the store available
 
 render(

@@ -1,52 +1,40 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import CourseList from './CourseList';
-import * as courseActions from '../../actions/courseActions';
+import * as userActions from '../../actions/userActions';
 import * as PropTypes from "react/lib/ReactPropTypes";
-import {browserHistory} from 'react-router';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import FlatButton from 'material-ui/FlatButton';
 
 
-class CoursesPage extends React.Component {
+class UsersPage extends React.Component {
   constructor(props,context) {
     super(props,context);
-    this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
-  }
-
-  redirectToAddCoursePage() {
-    browserHistory.push('/course');
   }
 
   render() {
-    const displayPosts = this.props.posts.map((post)=>{
-      return (
-        <TableRow key={post.id}>
+    const displayUsers = this.props.users.map((post)=>{
+      return <TableRow key={post.id}>
         <TableRowColumn>{post.id}</TableRowColumn>
-        <TableRowColumn>{post.title}</TableRowColumn>
-        <TableRowColumn>{post.body}</TableRowColumn>
+        <TableRowColumn>{post.name}</TableRowColumn>
+        <TableRowColumn>{post.username}</TableRowColumn>
       </TableRow>
-      );
     });
     return (
     <Card>
-        <h1>Courses Page Son</h1>
-      <input type="submit" value="Add Course" onClick={this.redirectToAddCoursePage}/>
-        <CourseList courses={this.props.courses}/>
-        <h1>Posts</h1>
+        <h1>Users Page Son</h1>
+      <h1>Posts</h1>
       <Table>
         <TableHeader>
           <TableRow>
             <TableHeaderColumn>Id</TableHeaderColumn>
-            <TableHeaderColumn>Title</TableHeaderColumn>
-            <TableHeaderColumn>Body</TableHeaderColumn>
+            <TableHeaderColumn>Name</TableHeaderColumn>
+            <TableHeaderColumn>Username</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {displayPosts}
+          {displayUsers}
         </TableBody>
       </Table>
       </Card>
@@ -54,30 +42,28 @@ class CoursesPage extends React.Component {
   }
 }
 
-CoursesPage.propTypes = {
-  courses:PropTypes.array.isRequired,
-  posts:PropTypes.array.isRequired,
+UsersPage.propTypes = {
+  users:PropTypes.array.isRequired,
   actions:PropTypes.object.isRequired
 };
 
 //ownProps optionally pass url params etc outside of state
 function mapStateToProps(state, ownProps) {
   return {
-    courses:state.courses,
-    posts:state.posts
+    users:state.users
   };
 }
 
 function mapDispatchToProps(dispatch) {
   // dispatch needed to wire action into redux
   return {
-    actions:bindActionCreators(courseActions,dispatch)
+    actions:bindActionCreators(userActions,dispatch)
   };
 }
 
 // wrap Container component with connect to bind state to props, dispatch actions to props from redux
 // mapStateToProps, mapDispatchToProps
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(UsersPage);
 
 /*
 redux uni directional flow on save
