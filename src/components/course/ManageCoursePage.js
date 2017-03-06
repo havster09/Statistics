@@ -19,6 +19,14 @@ class ManageCoursePage extends React.Component {
     this.saveCourse = this.saveCourse.bind(this);
   }
 
+  // lifecycle hook to update State once ajax returns courses data and find course is triggered
+  // reinit component state without redux
+  componentWillReceiveProps(nextProps) {
+    if(this.props.course.id !== nextProps.course.id) {
+      this.setState({course:Object.assign({},nextProps.course)});
+    }
+  }
+
   updateCourseState(event) {
     const field = event.target.name;
     let course = this.state.course;
@@ -29,6 +37,7 @@ class ManageCoursePage extends React.Component {
   saveCourse(event) {
     event.preventDefault();
     this.props.actions.saveCourse(this.state.course);
+    this.context.router.push('/courses');
   }
 
   render() {
@@ -50,8 +59,24 @@ ManageCoursePage.propTypes = {
   actions:PropTypes.object.isRequired
 };
 
+ManageCoursePage.contextTypes = {
+  router:PropTypes.object
+};
+
+function getCourseById(courses,courseId) {
+  const courseMatch = courses.find(course => course.id == courseId);
+  if(courseMatch) {
+    return courseMatch;
+  }
+  return null;
+}
+
 function mapStateToProps(state, ownProps) {
+  const courseId = ownProps.params.id; // from path`/course/:id`
   let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+  if(courseId && state.courses.length > 0) {
+    course = getCourseById(state.courses, courseId);
+  }
   const authorsFormattedForDropDown = state.authors.map(author=>{
     return {
       value:author.id,

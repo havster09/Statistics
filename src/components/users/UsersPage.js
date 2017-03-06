@@ -15,11 +15,11 @@ class UsersPage extends React.Component {
 
   render() {
     const displayUsers = this.props.users.map((post)=>{
-      return <TableRow key={post.id}>
+      return (<TableRow key={post.id}>
         <TableRowColumn>{post.id}</TableRowColumn>
         <TableRowColumn>{post.name}</TableRowColumn>
         <TableRowColumn>{post.username}</TableRowColumn>
-      </TableRow>
+      </TableRow>);
     });
     return (
     <Card>
