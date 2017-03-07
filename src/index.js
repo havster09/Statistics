@@ -8,6 +8,7 @@ import routes from './routes';
 import {loadCourses,loadPosts} from './actions/courseActions';
 import {loadUsers} from './actions/userActions';
 import {loadAuthors} from './actions/authorActions';
+import '../node_modules/toastr/build/toastr.min.css';
 import './styles/styles.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';

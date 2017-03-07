@@ -4,7 +4,7 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
 // destructure all props
-const CourseForm = ({course,allAuthors,onChange, onSave,loading,errors}) => {
+const CourseForm = ({course,allAuthors,onChange, onSave,errors,saving}) => {
     return (
         <form>
           <h1>Manage Course</h1>
@@ -36,8 +36,8 @@ const CourseForm = ({course,allAuthors,onChange, onSave,loading,errors}) => {
             onChange={onChange}
             error={errors.length}/>
           <input type="submit"
-                 disabled={loading}
-                 value={loading?'Saving':'Save'}
+                 disabled={saving}
+                 value={saving?'Saving':'Save'}
                  onClick={onSave}
           />
         </form>
@@ -49,8 +49,8 @@ CourseForm.propTypes = {
     allAuthors: PropTypes.array,
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    loading: PropTypes.bool,
-    errors: PropTypes.object
+    errors: PropTypes.object,
+    saving: PropTypes.bool
 };
 
 export default CourseForm;
