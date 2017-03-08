@@ -14,6 +14,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
+const injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
+
 const store = configureStore(); //pass state value from server if needed to overwrite state defaults in reducer
 store.dispatch(loadCourses());
 store.dispatch(loadPosts());
