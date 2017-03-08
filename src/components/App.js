@@ -6,13 +6,13 @@ import {connect} from 'react-redux';
 class App extends React.Component {
   constructor(props, context) {
     super(props,context);
-    this.state = {drawerOpen: false};
+    this.state = {open: false};
     this.handleToggleDrawer = this.handleToggleDrawer.bind(this);
   }
 
   handleToggleDrawer() {
     this.setState({
-      drawerOpen: !this.state.drawerOpen
+      open: !this.state.open
     });
   }
 
@@ -20,10 +20,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <AppBar docked={false} onLeftIconButtonTouchTap={this.handleToggleDrawer} onTitleTouchTap={this.handleToggleDrawer} title="RHBA Stats"/>
+        <AppBar onLeftIconButtonTouchTap={this.handleToggleDrawer} title="RHBA Stats"/>
         <Header loading={this.props.loading}/>
 
-        <Drawer open={this.state.drawerOpen}>
+        <Drawer open={this.state.open} onRequestChange={(open) => this.setState({open})} docked={false}>
           <MenuItem>Close</MenuItem>
           <MenuItem>Click nothing</MenuItem>
         </Drawer>
