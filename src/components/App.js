@@ -20,7 +20,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <AppBar docked={false} onRequestChange={drawerOpen => this.setState({drawerOpen})} onLeftIconButtonTouchTap={this.handleToggleDrawer} onTitleTouchTap={this.handleToggleDrawer} title="RHBA Stats"/>
+        <AppBar docked={false} onLeftIconButtonTouchTap={this.handleToggleDrawer} onTitleTouchTap={this.handleToggleDrawer} title="RHBA Stats"/>
         <Header loading={this.props.loading}/>
 
         <Drawer open={this.state.drawerOpen}>
