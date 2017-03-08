@@ -8,11 +8,18 @@ class App extends React.Component {
     super(props,context);
     this.state = {open: false};
     this.handleToggleDrawer = this.handleToggleDrawer.bind(this);
+    this.onRequestChange = this.onRequestChange.bind(this);
   }
 
   handleToggleDrawer() {
     this.setState({
       open: !this.state.open
+    });
+  }
+
+  onRequestChange() {
+    this.setState({
+      open:!this.state.open
     });
   }
 
@@ -23,11 +30,10 @@ class App extends React.Component {
         <AppBar onLeftIconButtonTouchTap={this.handleToggleDrawer} title="RHBA Stats"/>
         <Header loading={this.props.loading}/>
 
-        <Drawer open={this.state.open} onRequestChange={(open) => this.setState({open})} docked={false}>
+        <Drawer open={this.state.open} onRequestChange={this.onRequestChange} docked={false}>
           <MenuItem>Close</MenuItem>
           <MenuItem>Click nothing</MenuItem>
         </Drawer>
-
         {this.props.children}
       </div>
 
